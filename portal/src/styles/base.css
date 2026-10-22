@@ -1,0 +1,6 @@
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#fff}
+
+/* 80% screen ratio */
+.hm,.lg,.dashpage{zoom:.8}
