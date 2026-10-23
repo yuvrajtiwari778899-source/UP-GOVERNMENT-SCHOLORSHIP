@@ -116,9 +116,9 @@ function Slider() {
   )
 }
 
-function Popup({ onClose }) {
+function Popup({ show, onClose }) {
   return (
-    <div className="pop">
+    <div className={'pop' + (show ? ' show' : '')}>
       <div className="ph"><span>⚠ महत्वपूर्ण तिथियाँ</span><a>पूर्वदशम(9 &amp; 10) एवं दशमोत्तर(11 &amp; 12) के लिए यहाँ क्लिक करें</a><button onClick={onClose}>−</button></div>
       <div className="pb">
         <h3>दशमोत्तर <small>(11 &amp; 12 के अतिरिक्त) (सत्र 2026-27)</small></h3>
@@ -136,6 +136,11 @@ export default function Home() {
   const [pop, setPop] = useState(false)
   const [tab, setTab] = useState(0)
   const [acc, setAcc] = useState(-1)
+  // popup apne aap khulta hai jab page load ho
+  useEffect(() => {
+    const t = setTimeout(() => setPop(true), 700)
+    return () => clearTimeout(t)
+  }, [])
   return (
     <div className="hm">
       <div className="top">
@@ -234,7 +239,7 @@ export default function Home() {
         <p>Last Updated:</p>
       </div>
 
-      {pop && <Popup onClose={() => setPop(false)} />}
+      <Popup show={pop} onClose={() => setPop(false)} />
       <button className="bell" onClick={() => setPop(!pop)} aria-label="Notifications">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M12 22a2.4 2.4 0 002.4-2.4H9.6A2.4 2.4 0 0012 22zm7-6.4V10c0-3.4-1.8-6.2-5-7V2.5a2 2 0 00-4 0V3C6.800 3.800 5 6.600 5 10v5.600L3 17.600V19h18v-1.400z" /></svg>
       </button>
