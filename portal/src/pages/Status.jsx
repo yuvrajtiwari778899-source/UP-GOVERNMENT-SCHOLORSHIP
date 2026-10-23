@@ -41,7 +41,7 @@ export default function Status(){
     <tr><td className="p" style={{height:'37px'}}>6.Data level after Scrutiny with reason</td><td className="s">Correct</td><td className="d">-</td></tr>
     <tr><td className="p">7.PFMS Verification Status</td><td className="s">Verified</td><td className="d">27/12/2025</td></tr>
     <tr><td className="p" style={{height:'37px'}}>8.Verification by District Scholarship Sanction Committee</td><td className="s">Verified</td><td className="d">21/09/2026</td></tr>
-    <tr><td className="p">9.Blocked by Directorate</td><td className="s"></td><td className="d"></td></tr>
+    <tr><td className="p">9.Blocked by Directorate</td><td className="s">Blocked by directorate due to non availibility of fund</td><td className="d">27/10/2026</td></tr>
     <tr><td className="p">10.Payment Status</td><td className="s"></td><td className="d"></td></tr>
   </table>
   <div className="in"><table className="rs">

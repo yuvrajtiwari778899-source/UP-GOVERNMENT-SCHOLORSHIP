@@ -61,3 +61,4 @@
 .lg .header .swachh{display:none}
 .lg .header p.mq{width:92%;font-size:13px}
 }
+.lg .err{position:absolute;left:36px;top:54px;display:flex;align-items:center;gap:5px;font:400 17px Arial,Helvetica,sans-serif;color:#333}

@@ -23,6 +23,7 @@ export default function Login() {
   const cv = useRef(null)
   const mq = useRef(null)
   const [code, setCode] = useState('')
+  const [capErr, setCapErr] = useState(false)
   const [f, setF] = useState({ reg: '', otr: '', pwd: '', cap: '' })
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value })
 
@@ -62,12 +63,14 @@ export default function Login() {
   }, [])
 
   const submit = () => {
+    setCapErr(false)
+    // captcha galat ho to inline message dikhao, naya captcha banao aur saare fields khali karo
+    if (f.cap !== code) { setCapErr(true); setF({ reg: '', otr: '', pwd: '', cap: '' }); return gen() }
     if (!f.reg.trim()) return alert('रजिस्ट्रेशन संख्या भरें')
     if (!f.pwd) return alert('पासवर्ड / वेरिफिकेशन कोड डालें')
     if (f.reg.trim() !== CREDENTIALS.reg) return alert('रजिस्ट्रेशन संख्या गलत है')
     if (f.otr.trim().toUpperCase() !== CREDENTIALS.otr) return alert('ओटीआर नंबर गलत है')
     if (f.pwd !== CREDENTIALS.pwd) return alert('पासवर्ड गलत है')
-    if (f.cap !== code) { alert('कैप्चा कोड गलत है'); setF({ ...f, cap: '' }); return gen() }
     setSession({ reg: f.reg.trim(), otr: f.otr.trim() })
     nav('/dashboard')
   }
@@ -86,7 +89,13 @@ export default function Login() {
 
       <div className="box">
         <div className="pill">उ0प्र0/अन्य प्रदेश में अध्ययनरत छात्र/छात्राओं के लिए छात्रवृति एवं शुल्क प्रतिपूर्ति (सत्र : 2026-27)</div>
-        <div className="row" style={{ marginTop: 2 }}>
+        {capErr && (
+          <div className="err">
+            <svg width="20" height="20" viewBox="0 0 20 20"><path d="M3.500 3.500l13 13M16.500 3.500l-13 13" stroke="#f5a623" strokeWidth="4.500" strokeLinecap="round" /></svg>
+            <span>Invalid Captcha...! Try Again.</span>
+          </div>
+        )}
+        <div className="row" style={{ marginTop: capErr ? 32 : 2 }}>
           <label>1: आवेदन का प्रकार <span className="req">*</span> :</label>
           <div className="ig big"><div className="ic">{listIcon}</div><div className="rd"><input type="radio" checked readOnly /> नवीनीकरण (Renewal)</div></div>
         </div>
